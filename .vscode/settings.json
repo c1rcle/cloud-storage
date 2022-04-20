@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "files.exclude": {
+    ".git": true,
+    ".vscode": true,
+    "node_modules": true
+  }
+}
