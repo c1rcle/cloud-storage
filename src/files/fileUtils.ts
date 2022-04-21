@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs-extra";
 import os from "os";
 import path from "path";
 import { v4 as uuid } from "uuid";
@@ -12,10 +12,10 @@ export interface TestFile {
 
 export interface TestFileGenerator {
   createTestFile(size: number): TestFile;
-  dispose(file: TestFile): void;
+  deleteTempFiles(): void;
 }
 
-export const getTestFileGenerator = (): TestFileGenerator => {
+const getTestFileGenerator = (): TestFileGenerator => {
   const getTempDir = (dirName: string): string => {
     const dirPath = path.join(os.tmpdir(), "cloud-testing-env", dirName);
     if (!fs.existsSync(dirPath)) {
@@ -45,8 +45,11 @@ export const getTestFileGenerator = (): TestFileGenerator => {
         remoteFilePath: fileName,
       };
     },
-    dispose: file => {
-      fs.rmSync(file.sourceFilePath);
+    deleteTempFiles: () => {
+      fs.emptyDirSync(sourceDir);
+      fs.emptyDirSync(downloadDir);
     },
   };
 };
+
+export default getTestFileGenerator;

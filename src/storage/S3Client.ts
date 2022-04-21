@@ -5,19 +5,15 @@ import {
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 
-import fs from "fs";
+import fs from "fs-extra";
 import { StorageClient } from "./StorageClient.js";
+import { S3Options } from "../yargs/BenchmarkS3Command.js";
 import { writeStreamToFile } from "../utils/StreamUtils.js";
 import { measureExecutionTime, measureTransferTime } from "../utils/BenchmarkingUtils.js";
 
-export interface S3Options {
-  accessKeyId: string;
-  accessKeySecret: string;
-  bucketName: string;
-}
-
-const getS3Client = async (options: S3Options): Promise<StorageClient> => {
+const getS3Client = (options: S3Options): StorageClient => {
   const s3Client = new S3Client({
+    region: "eu-central-1",
     credentials: {
       accessKeyId: options.accessKeyId,
       secretAccessKey: options.accessKeySecret,

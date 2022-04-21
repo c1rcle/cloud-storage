@@ -1,5 +1,9 @@
 import { TestFile } from "../files/fileUtils.js";
-import { TransferRequestResult } from "./RequestResult.js";
+
+export interface TransferRequestResult {
+  timeElapsed: number;
+  averageMbps: number;
+}
 
 export interface StorageClient {
   downloadFile(file: TestFile): Promise<TransferRequestResult>;

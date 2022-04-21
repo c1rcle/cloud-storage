@@ -1,14 +1,9 @@
 import { Storage } from "@google-cloud/storage";
 import { StorageClient } from "./StorageClient.js";
+import { CloudStorageOptions } from "../yargs/BenchmarkCloudStorageCommand.js";
 import { measureExecutionTime, measureTransferTime } from "../utils/BenchmarkingUtils.js";
 
-export interface CloudStorageOptions {
-  projectId: string;
-  keyFile: string;
-  bucketName: string;
-}
-
-const getCloudStorageClient = async (options: CloudStorageOptions): Promise<StorageClient> => {
+const getCloudStorageClient = (options: CloudStorageOptions): StorageClient => {
   const bucket = new Storage({
     projectId: options.projectId,
     keyFilename: options.keyFile,

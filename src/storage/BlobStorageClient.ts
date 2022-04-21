@@ -1,14 +1,10 @@
 import { BlobServiceClient } from "@azure/storage-blob";
 import { StorageClient } from "./StorageClient.js";
+import { BlobStorageOptions } from "../yargs/BenchmarkBlobStorageCommand.js";
 import { measureExecutionTime, measureTransferTime } from "../utils/BenchmarkingUtils.js";
 
-export interface BlobStorageOptions {
-  connectionString: string;
-  containerName: string;
-}
-
 // prettier-ignore
-const getBlobStorageClient = async (options: BlobStorageOptions): Promise<StorageClient> => {
+const getBlobStorageClient = (options: BlobStorageOptions): StorageClient => {
   const containerClient = BlobServiceClient
     .fromConnectionString(options.connectionString)
     .getContainerClient(options.containerName);

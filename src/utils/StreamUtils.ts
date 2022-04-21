@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs-extra";
 import { Readable } from "stream";
 
 export const writeStreamToFile = async (stream: Readable, filePath: string): Promise<void> =>

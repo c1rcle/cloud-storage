@@ -1,11 +1,8 @@
 import { hrtime } from "process";
-import { TransferRequestResult } from "../storage/RequestResult.js";
+import { TransferRequestResult } from "../storage/StorageClient.js";
 
-const kibi = 1024;
 const mebi = 1024 * 1024;
-const nanoBigInt = 10n ** 9n;
-
-export const kilobytesToBytes = (value: number) => value * kibi;
+const nano = 10 ** 9;
 
 export const megabytesToBytes = (value: number) => value * mebi;
 
@@ -17,7 +14,7 @@ export const measureTransferTime = async (
 ): Promise<TransferRequestResult> => {
   const start = hrtime.bigint();
   await block();
-  const timeElapsed = Number((hrtime.bigint() - start) / nanoBigInt);
+  const timeElapsed = Number(hrtime.bigint() - start) / nano;
 
   return {
     timeElapsed: timeElapsed,
@@ -28,5 +25,5 @@ export const measureTransferTime = async (
 export const measureExecutionTime = async (block: () => Promise<void>): Promise<number> => {
   const start = hrtime.bigint();
   await block();
-  return Number((hrtime.bigint() - start) / nanoBigInt);
+  return Number(hrtime.bigint() - start) / nano;
 };
