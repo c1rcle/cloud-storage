@@ -3,7 +3,6 @@
 import chalk from "chalk";
 import yargs, { Argv } from "yargs";
 import { hideBin } from "yargs/helpers";
-import dispatchCommand from "./yargs/DispatchCommand.js";
 import benchmarkS3Command from "./yargs/BenchmarkS3Command.js";
 import benchmarkBlobStorageCommand from "./yargs/BenchmarkBlobStorageCommand.js";
 import benchmarkCloudStorageCommand from "./yargs/BenchmarkCloudStorageCommand.js";
@@ -21,8 +20,7 @@ const onFail = (message: string, error: Error, yargs: Argv) => {
 };
 
 yargs(hideBin(process.argv))
-  .scriptName("cloud-testing-env")
-  .command(dispatchCommand)
+  .scriptName("cloud-storage")
   .command(benchmarkS3Command)
   .command(benchmarkBlobStorageCommand)
   .command(benchmarkCloudStorageCommand)

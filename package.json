@@ -1,11 +1,11 @@
 {
-  "name": "cloud-testing-env",
+  "name": "cloud-storage",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "cloud-testing-env": "./dist/index.js"
+    "cloud-storage": "./dist/index.js"
   },
   "scripts": {
     "build": "npx tsc && npm install -g ."
